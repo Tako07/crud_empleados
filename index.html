@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>CRUD de empleados</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-light bg-white">
+        <span class="navbar-brand mb-0 h1">
+            <img id='logo' src="images/emkode.JPG" width="10%" height="10%">
+        </span>
+
+    </nav>
+    <div class="row justify-content-center mt-4">
+        <input id="search" class="form-control mr-sm-2 col-5" type="search" placeholder="Search" aria-label="Search"
+            onkeyup="cambio();">
+        <table class="table table-striped col-8 mt-4">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="empleados">
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="row justify-content-center mt-4">
+        <button type="button" onclick=showModal2() class="btn btn-primary">Nuevo empleado</button>
+    </div>
+
+
+    <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Editar empleado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="id" placeholder="Nombre" required hidden>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control" id="name" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name">Apellido</label>
+                        <input type="text" class="form-control" id="last_name" placeholder="Apellido">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo</label>
+                        <input type="text" class="form-control" id="email" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="text" class="form-control" id="phone" placeholder="phone">
+                    </div>
+
+                    <button type="button" onclick=updateEmployee() class="btn btn-primary">Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Editar empleado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="newName">Nombre</label>
+                        <input type="text" class="form-control" id="newName" placeholder="Nombre" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newLast_name">Apellido</label>
+                        <input type="text" class="form-control" id="newLast_name" placeholder="Apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newEmail">Correo</label>
+                        <input type="text" class="form-control" id="newEmail" placeholder="Correo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPhone">Teléfono</label>
+                        <input type="text" class="form-control" id="newPhone" placeholder="Teléfono" required>
+                    </div>
+
+                    <button type="button" onclick=newEmployee() class="btn btn-primary">Guardar Cambios</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
+<script src="js/peticiones.js"></script>
+
+</html>
